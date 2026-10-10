@@ -46,7 +46,7 @@ Con la variable definida se carga el Pixel y se registra `PageView`. Cada clic e
 
 1. En Vercel: **Add New → Project** e importa `snakedevsoft2/Mbsignature`. Vercel detecta Next.js y no hacen falta variables.
 2. Cada push a `main` publica en producción; las demás ramas generan una URL de vista previa.
-3. En **Settings → Domains** agrega `dinamicasmb.com` y elige que `www.dinamicasmb.com` redirija al dominio sin www (así coincide con `site.url`).
+3. En **Settings → Domains** están `www.dinamicasmb.com` (principal, conectado a Production) y `dinamicasmb.com` (redirige con 308 a `www`). Si cambias cuál es el principal, actualiza `site.url`.
 
 ### DNS en Hostinger
 

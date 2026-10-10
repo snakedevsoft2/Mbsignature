@@ -4,7 +4,8 @@ const yearsOfExperience = 6;
 
 export const site = {
   name: "MB Signature Rifas",
-  url: "https://dinamicasmb.com",
+  // Dirección principal en Vercel; dinamicasmb.com redirige a www.
+  url: "https://www.dinamicasmb.com",
   description: `Más de ${yearsOfExperience} años cumpliendo sueños. Únete al exclusivo Grupo Signature en WhatsApp y participa por grandes premios: rifas exclusivas, cupos limitados y premios constantes.`,
 
   // Enlace de invitación al grupo. Si el grupo se llena, reemplázalo por el nuevo enlace.
