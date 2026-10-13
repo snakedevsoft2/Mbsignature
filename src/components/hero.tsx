@@ -1,84 +1,79 @@
-import Image from "next/image";
+import { Banknote, Ticket } from "lucide-react";
 import { site } from "@/config/site";
-import { delay } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 import { HeroVideo } from "./hero-video";
-import { Sparkle } from "./icons";
-import { JoinButton } from "./join-button";
-import { Starfield } from "./starfield";
+import { WhatsAppIcon } from "./icons";
+
+const perks = [
+  { icon: WhatsAppIcon, label: "Grupo privado en WhatsApp" },
+  { icon: Ticket, label: "Tú eliges tu número" },
+  { icon: Banknote, label: "Premios en efectivo" },
+];
 
 export function Hero() {
+  const { offer, video } = site;
+
   return (
-    <section
-      id="inicio"
-      aria-labelledby="hero-title"
-      className="hero relative isolate overflow-hidden"
-    >
-      <div aria-hidden="true" className="hero-bg absolute inset-0 -z-10">
-        <div className="hero-wave hidden lg:block">
-          <Image src="/brand/onda-dorada.jpg" alt="" fill sizes="46vw" className="object-cover object-right" />
-        </div>
-        <div className="hero-ribbons lg:hidden">
-          <Image src="/brand/cintas-doradas.jpg" alt="" fill sizes="100vw" className="object-cover" />
-        </div>
-        <Starfield className="hero-stars absolute inset-0 size-full" />
-        <div className="grain absolute inset-0" />
+    <section aria-labelledby="hero-title" className="hero">
+      <Confetti />
+
+      <div className="hero__grid">
+        <h1 id="hero-title" className="offer">
+          <span className="offer__lead">Con solo</span>{" "}
+          <span className="offer__num">{formatNumber(offer.price)}</span>{" "}
+          <span className="offer__ribbon">Pesos</span>{" "}
+          <span className="offer__lead offer__lead--gap">Puedes ganar</span>{" "}
+          <span className="offer__small">hasta</span>{" "}
+          <span className="offer__num">{formatNumber(offer.prize)}</span>{" "}
+          <span className="offer__ribbon">En efectivo</span>
+        </h1>
+
+        <HeroVideo
+          src={video.src}
+          poster={video.poster}
+          label="Video de Marcela, creadora de MB Signature, invitando a unirse al grupo"
+        />
       </div>
 
-      <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
-        <div className="flex flex-col items-center text-center">
-          <p className="hero-eyebrow enter" style={delay(100)}>
-            Sueña <span aria-hidden="true">·</span> Participa <span aria-hidden="true">·</span> Gana
-          </p>
+      <ul className="perks">
+        {perks.map(({ icon: Icon, label }) => (
+          <li key={label}>
+            <Icon className="perks__icon" strokeWidth={1.6} />
+            {label}
+          </li>
+        ))}
+      </ul>
 
-          <h1 id="hero-title" className="hero-name">
-            <span className="sr-only">MB Signature Rifas</span>
-            <span aria-hidden="true" className="hero-name__inner">
-              <span className="hero-name__word enter-zoom" style={delay(200)}>
-                MB
-                <Sparkle className="hero-spark hero-spark--1" />
-              </span>
-              <span className="hero-name__script enter-write" style={delay(650)}>
-                Signature
-                <Sparkle className="hero-spark hero-spark--2" />
-              </span>
-              <span className="hero-name__word enter-zoom" style={delay(380)}>
-                Rifas
-                <Sparkle className="hero-spark hero-spark--3" />
-              </span>
-            </span>
-          </h1>
-
-          <p className="hero-lead enter" style={delay(900)}>
-            Las mejores rifas, los premios más exclusivos.
-          </p>
-          <p className="hero-sub enter" style={delay(1000)}>
-            En MB Signature Rifas convertimos tus sueños en oportunidades. Participa, gana y sé parte de
-            una experiencia única.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center enter" style={delay(1120)}>
-            <JoinButton id="hero-cta" location="hero" size="lg" label="Unirme al grupo" sublabel="Rifas exclusivas" />
-            <p className="mt-3.5 text-xs text-muted">Unirte es gratis, solo necesitas WhatsApp.</p>
-          </div>
-        </div>
-
-        <div className="hero-media enter" style={delay(500)}>
-          <HeroVideo
-            src={site.video.src}
-            poster={site.video.poster}
-            label={`Video de ${site.founder.name} invitando a unirse al Grupo Signature`}
-          />
-          <Image
-            src="/brand/corona.png"
-            alt=""
-            aria-hidden="true"
-            width={520}
-            height={291}
-            sizes="9rem"
-            className="hero-media__crown"
-          />
-        </div>
-      </div>
+      <p className="hint">
+        Toca el botón verde y únete
+        <svg viewBox="0 0 40 52" aria-hidden="true" className="hint__arrow">
+          <path d="M13 3h14v24h10L20 48 3 27h10Z" />
+        </svg>
+      </p>
     </section>
+  );
+}
+
+/** Tiras doradas sueltas, como confeti, en los bordes del inicio. */
+function Confetti() {
+  const strips = [
+    [6, 8, -28],
+    [18, 30, 40],
+    [4, 52, 12],
+    [12, 76, -50],
+    [88, 6, 35],
+    [95, 26, -20],
+    [84, 48, 60],
+    [93, 70, -38],
+    [46, 3, 70],
+    [62, 92, -15],
+  ];
+
+  return (
+    <div aria-hidden="true" className="confetti">
+      {strips.map(([x, y, angle]) => (
+        <span key={`${x}-${y}`} style={{ left: `${x}%`, top: `${y}%`, rotate: `${angle}deg` }} />
+      ))}
+    </div>
   );
 }

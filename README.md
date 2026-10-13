@@ -1,6 +1,6 @@
-# MB Signature Rifas · dinamicasmb.com
+# MB Signature · dinamicasmb.com
 
-Landing que recibe el tráfico de las campañas y lo lleva al Grupo Signature de WhatsApp.
+Landing sencilla que recibe el tráfico de las campañas y lo lleva al Grupo Signature de WhatsApp: un inicio con la oferta y el video de Marcela, la sección de ganadores y un solo botón para unirse.
 
 Next.js 16 (App Router) · Tailwind CSS 4 · desplegada en Vercel.
 
@@ -19,17 +19,16 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 
 | Qué | Campo |
 | --- | --- |
-| Enlace del grupo de WhatsApp (todos los botones) | `whatsappGroupUrl` |
-| Años de experiencia | `yearsOfExperience` |
-| Foto de Marcela (archivo dentro de `public/`) | `founder.photo` |
-| Video del hero y su portada (archivos dentro de `public/video/`) | `video.src`, `video.poster` |
-| Redes sociales del footer (vacío = no se muestra) | `social.instagram`, `social.facebook`, `social.tiktok` |
-| Ganadores: monto, Ganadora/Ganador y foto opcional | `winners` |
+| Enlace del grupo de WhatsApp (el botón verde) | `whatsappGroupUrl` |
+| Cifras grandes del inicio (valor por número y premio) | `offer.price`, `offer.prize` |
+| Video del inicio y su portada (archivos dentro de `public/video/`) | `video.src`, `video.poster` |
+| Instagram del pie de página (vacío = no se muestra) | `instagram` |
+| Capturas de los ganadores (archivos dentro de `public/ganadores/`) | `winnerChats` |
 
-- Los textos de cada sección están en `src/components/` (un archivo por sección).
-- Las imágenes de marca (corona, fondos dorados, íconos dorados, diamante, foto del premio) están en `public/brand/`.
-- El video se reproduce sin sonido mientras está en pantalla y tiene botón para activar el sonido. Para cambiarlo, reemplaza `public/video/marcela.mp4` (vertical, idealmente de menos de 5 MB) y su portada `marcela-portada.jpg`.
-- La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630).
+- La sección de ganadores solo aparece cuando `winnerChats` tiene capturas.
+- Las capturas originales, con los números de celular a la vista, van en `ganadores-originales/` (no se sube a GitHub). En `public/ganadores/` solo van las versiones con los números tapados.
+- El video solo se descarga cuando empieza a reproducirse, sin sonido; al tocarlo se activa el sonido.
+- La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo del encabezado es `public/brand/emblema-mb.png`.
 - Los íconos son `src/app/icon.svg`, `src/app/favicon.ico` y `src/app/apple-icon.png`.
 
 ## Pixel de Meta (opcional)
@@ -40,7 +39,7 @@ Agrega la variable en Vercel → Settings → Environment Variables y vuelve a d
 NEXT_PUBLIC_META_PIXEL_ID=123456789012345
 ```
 
-Con la variable definida se carga el Pixel y se registra `PageView`. Cada clic en un botón del grupo envía un evento `Lead`, con la ubicación del botón en `content_category`: `hero`, `header`, `ganadores`, `como-funciona`, `final`, `flotante` o `footer`. Sin la variable no se carga nada.
+Con la variable definida se carga el Pixel y se registra `PageView`. Cada clic en el botón del grupo envía un evento `Lead` (con `content_category: principal`). Sin la variable no se carga nada.
 
 ## Despliegue
 

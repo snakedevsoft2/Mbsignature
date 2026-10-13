@@ -40,6 +40,9 @@ yarn-error.log*
 # material original enviado por el cliente (la versión usada está en /public)
 /VD/
 
+# capturas de ganadores sin tapar los números de celular (nunca se suben)
+/ganadores-originales/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

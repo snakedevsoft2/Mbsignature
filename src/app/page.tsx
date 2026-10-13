@@ -1,29 +1,22 @@
-import { About } from "@/components/about";
-import { Benefits } from "@/components/benefits";
-import { CtaBand } from "@/components/cta-band";
-import { Features } from "@/components/features";
 import { Hero } from "@/components/hero";
+import { JoinButton } from "@/components/join-button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { Steps } from "@/components/steps";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { Winners } from "@/components/winners";
 
 export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="page">
         <Hero />
-        <Features />
-        <About />
-        <Benefits />
-        <Steps />
         <Winners />
-        <CtaBand />
+        {/* El único botón de la página: flota abajo mientras se lee y se acomoda al final. */}
+        <div className="join-dock">
+          <JoinButton />
+        </div>
       </main>
       <SiteFooter />
-      <WhatsAppFloat />
     </>
   );
 }

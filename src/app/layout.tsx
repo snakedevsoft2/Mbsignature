@@ -1,28 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Great_Vibes, Jost } from "next/font/google";
-import { GoldDefs } from "@/components/icons";
+import { Cinzel, Montserrat } from "next/font/google";
 import { MetaPixel } from "@/components/meta-pixel";
 import { site } from "@/config/site";
 import "./globals.css";
 
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
-  subsets: ["latin"],
-  axes: ["opsz"],
-});
-
-const greatVibes = Great_Vibes({
-  variable: "--font-great-vibes",
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const jost = Jost({
-  variable: "--font-jost",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
-const title = "MB Signature Rifas | Únete al Grupo Signature";
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+});
+
+const title = "MB Signature | Únete al Grupo Signature";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -47,19 +39,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0a08",
-  colorScheme: "dark",
+  themeColor: "#f5eedf",
+  colorScheme: "light",
   viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="es"
-      className={`${bodoni.variable} ${greatVibes.variable} ${jost.variable} antialiased`}
-    >
+    <html lang="es" className={`${montserrat.variable} ${cinzel.variable} antialiased`}>
       <body>
-        <GoldDefs />
         {children}
         <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
       </body>
