@@ -25,6 +25,9 @@ export const site = {
 
   // Deja vacío ("") si no se usa y no se mostrará en el pie de página.
   instagram: "https://www.instagram.com/marcebetasignature1/",
+
+  // Pixel de Meta de las campañas. Vacío ("") = no se carga.
+  metaPixelId: "1590585119024916",
 };
 
 export type WinnerChat = {

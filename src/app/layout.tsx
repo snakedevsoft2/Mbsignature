@@ -49,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="es" className={`${montserrat.variable} ${cinzel.variable} antialiased`}>
       <body>
         {children}
-        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
+        <MetaPixel pixelId={site.metaPixelId} />
       </body>
     </html>
   );

@@ -23,6 +23,7 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 | Cifras grandes del inicio (valor por número y premio) | `offer.price`, `offer.prize` |
 | Video del inicio y su portada (archivos dentro de `public/video/`) | `video.src`, `video.poster` |
 | Instagram del pie de página (vacío = no se muestra) | `instagram` |
+| ID del Pixel de Meta | `metaPixelId` |
 | Capturas de los ganadores (archivos dentro de `public/ganadores/`) | `winnerChats` |
 
 - La sección de ganadores solo aparece cuando `winnerChats` tiene capturas.
@@ -31,15 +32,9 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 - La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo del encabezado es `public/brand/emblema-mb.png`.
 - Los íconos son `src/app/icon.svg`, `src/app/favicon.ico` y `src/app/apple-icon.png`.
 
-## Pixel de Meta (opcional)
+## Pixel de Meta
 
-Agrega la variable en Vercel → Settings → Environment Variables y vuelve a desplegar:
-
-```
-NEXT_PUBLIC_META_PIXEL_ID=123456789012345
-```
-
-Con la variable definida se carga el Pixel y se registra `PageView`. Cada clic en el botón del grupo envía un evento `Lead` (con `content_category: principal`). Sin la variable no se carga nada.
+El ID del Pixel está en `site.metaPixelId` (`src/config/site.ts`). La página registra `PageView` al abrirse y un evento `Lead` (con `content_category: principal`) cada vez que alguien toca el botón del grupo. Para quitar el Pixel, deja el campo vacío (`""`).
 
 ## Despliegue
 
