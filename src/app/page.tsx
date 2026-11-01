@@ -3,6 +3,7 @@ import { GroupMedia } from "@/components/group-media";
 import { Hero } from "@/components/hero";
 import { JoinButton } from "@/components/join-button";
 import { LuxBackground } from "@/components/lux-background";
+import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Steps } from "@/components/steps";
@@ -25,6 +26,7 @@ export default function Home() {
         </div>
       </main>
       <SiteFooter />
+      <PageMotion />
     </>
   );
 }

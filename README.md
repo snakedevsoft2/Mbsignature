@@ -1,6 +1,6 @@
 # MB Signature · dinamicasmb.com
 
-Landing sencilla que recibe el tráfico de las campañas y lo lleva al Grupo Signature de WhatsApp: un inicio con la oferta y el video de Marcela, la sección de ganadores y un solo botón para unirse.
+Landing que recibe el tráfico de las campañas y lo lleva al Grupo Signature de WhatsApp: inicio con el video de Marcela, cómo funciona en 3 pasos, videos e historias del grupo, cierre y un solo botón verde que acompaña toda la página.
 
 Next.js 16 (App Router) · Tailwind CSS 4 · desplegada en Vercel.
 
@@ -20,17 +20,29 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 | Qué | Campo |
 | --- | --- |
 | Enlace del grupo de WhatsApp (el botón verde) | `whatsappGroupUrl` |
-| Cifras grandes del inicio (valor por número y premio) | `offer.price`, `offer.prize` |
-| Video del inicio y su portada (archivos dentro de `public/video/`) | `video.src`, `video.poster` |
-| Instagram del pie de página (vacío = no se muestra) | `instagram` |
+| Años de experiencia | `yearsOfExperience` |
+| Video principal y su portada (archivos dentro de `public/video/`) | `video.src`, `video.poster` |
+| Instagram oficial (vacío = no se muestra) | `instagram` |
+| Historia destacada de Instagram que se enlaza | `instagramHighlight` |
 | ID del Pixel de Meta | `metaPixelId` |
-| Capturas de los ganadores (archivos dentro de `public/ganadores/`) | `winnerChats` |
 
-- La sección de ganadores solo aparece cuando `winnerChats` tiene capturas.
-- Las capturas originales, con los números de celular a la vista, van en `ganadores-originales/` (no se sube a GitHub). En `public/ganadores/` solo van las versiones con los números tapados.
-- El fondo (negro, onda y cintas doradas, estrellas que titilan y destellan) está en `src/components/lux-background.tsx` y `starfield.tsx`.
-- El video arranca solo y sin sonido al entrar a la página; al tocarlo se activa el sonido.
-- La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo del encabezado es `public/brand/emblema-mb.png`.
+### Videos e historias del grupo
+
+La sección "Así se vive el Grupo Signature" se arma sola con lo que haya en estas carpetas, ordenado por nombre, en una cuadrícula de tarjetas verticales (2 columnas en celular, 3 en tablet y 5 en computador):
+
+- `public/video/clientes/`: videos (`.mp4`, `.webm`, `.mov`). Se reproducen sin sonido al aparecer en pantalla; al tocarlos se activa el sonido.
+- `public/historias/`: imágenes (`.jpg`, `.png`, `.webp`), por ejemplo capturas de las historias destacadas de Instagram. Se ven completas, sin recortar, y al tocarlas se abren en grande. Instagram no permite insertar historias en otras páginas, por eso se suben como archivos.
+
+**Antes de subir una captura, tapa los números de celular.** Las originales van en `img/` (no se sube a GitHub) y en `public/historias/` solo las versiones con los números tapados.
+
+Para que salgan en un orden concreto, ponles un número al inicio del nombre (`01-...`, `02-...`). Si las dos carpetas están vacías, la sección no aparece. Después de agregar o quitar archivos hay que volver a desplegar (push a `main`).
+
+### Otros
+
+- El fondo (negro, luces dorada y verde, estrellas que titilan y destellan) está en `src/components/lux-background.tsx` y `starfield.tsx`.
+- El video principal arranca solo y sin sonido al entrar a la página.
+- Las animaciones de entrada y de aparición al bajar están en `globals.css`; las que necesitan JS (aparición al bajar, luz que sigue al mouse, inclinación del video) en `src/components/page-motion.tsx`. Si el celular tiene activado "reducir movimiento", se desactivan.
+- La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo de la barra superior es `public/brand/emblema-mb.png`.
 - Los íconos son `src/app/icon.svg`, `src/app/favicon.ico` y `src/app/apple-icon.png`.
 
 ## Pixel de Meta

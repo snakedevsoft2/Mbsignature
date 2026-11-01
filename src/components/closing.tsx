@@ -6,9 +6,9 @@ export function Closing() {
     <section aria-labelledby="cierre-title" className="section container-page">
       <div className="closing reveal">
         <span aria-hidden="true" className="closing__glow" />
-        <p className="eyebrow">Más de {site.yearsOfExperience} años cumpliendo sueños</p>
+        <p className="eyebrow eyebrow--plain">Más de {site.yearsOfExperience} años cumpliendo sueños</p>
         <h2 id="cierre-title" className="closing__title">
-          La suerte también está <span className="text-gold-grad">en los grupos</span>
+          La suerte también está <span className="gold-shimmer">en los grupos</span>
         </h2>
         <p className="closing__text">
           Entra hoy al Grupo Signature y no te pierdas la dinámica del día. Unirte es gratis, solo
@@ -17,7 +17,7 @@ export function Closing() {
         {site.instagram ? (
           <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-link mt-6">
             <InstagramIcon className="size-4" />
-            Síguenos en nuestro Instagram oficial
+            Síguenos en Instagram
           </a>
         ) : null}
       </div>

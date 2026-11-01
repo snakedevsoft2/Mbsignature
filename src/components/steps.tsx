@@ -1,4 +1,5 @@
 import { Ticket, Trophy } from "lucide-react";
+import { delay } from "@/lib/utils";
 import { WhatsAppIcon } from "./icons";
 
 const steps = [
@@ -23,13 +24,13 @@ export function Steps() {
   return (
     <section aria-labelledby="pasos-title" className="section container-page">
       <p className="eyebrow reveal">Cómo funciona</p>
-      <h2 id="pasos-title" className="section__title reveal">
+      <h2 id="pasos-title" className="section__title reveal" style={delay(100)}>
         Participar es <span className="text-gold-grad">muy fácil</span>
       </h2>
 
       <ol className="steps">
         {steps.map(({ icon: Icon, title, text }, index) => (
-          <li key={title} className="step reveal">
+          <li key={title} className="step reveal" style={delay(index * 140)}>
             <span aria-hidden="true" className="step__number">
               {String(index + 1).padStart(2, "0")}
             </span>

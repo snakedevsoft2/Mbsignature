@@ -37,8 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-# material original enviado por el cliente (la versión usada está en /public)
+# material original enviado por el cliente (la versión usada, con los celulares tapados, está en /public)
 /VD/
+/img/
 
 
 # typescript
