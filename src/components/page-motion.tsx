@@ -4,11 +4,11 @@ import { useEffect } from "react";
 
 /**
  * Animaciones que necesitan JS: bloques que aparecen al bajar, luz dorada que sigue al mouse
- * e inclinación 3D del video. No hace nada si el usuario pidió reducir movimiento.
+ * e inclinación 3D del video. Con "reducir movimiento" solo se mantiene la aparición (como fundido).
  */
 export function PageMotion() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cleanups: Array<() => void> = [];
 
     // Solo se esconden los bloques que todavía no están en pantalla, para que nada parpadee.
@@ -31,7 +31,7 @@ export function PageMotion() {
     }
     cleanups.push(() => revealObserver.disconnect());
 
-    if (window.matchMedia("(pointer: fine)").matches) {
+    if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
       const root = document.documentElement;
       let frame = 0;
       const onPointerMove = (event: PointerEvent) => {

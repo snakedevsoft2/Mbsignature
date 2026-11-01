@@ -2,14 +2,15 @@ import { site } from "@/config/site";
 import { getGroupMedia } from "@/lib/media";
 import { delay } from "@/lib/utils";
 import { InstagramIcon } from "./icons";
-import { PhoneVideo } from "./phone-video";
-import { ZoomableImage } from "./zoomable-image";
+import { StoryPhone } from "./story-phone";
 
-/** Videos e imágenes de historias del grupo, en cuadrícula de tarjetas verticales (2 columnas en celular). */
+/** Dos celulares que pasan solos los videos y las historias del grupo, repartidos entre los dos. */
 export function GroupMedia() {
   const media = getGroupMedia();
   if (media.length === 0) return null;
-  const hasImages = media.some((item) => item.type === "image");
+  const phones = [media.filter((_, index) => index % 2 === 0), media.filter((_, index) => index % 2 === 1)].filter(
+    (items) => items.length > 0,
+  );
 
   return (
     <section aria-labelledby="grupo-title" className="section">
@@ -20,23 +21,16 @@ export function GroupMedia() {
         </h2>
         <p className="section__lead reveal" style={delay(200)}>
           Videos e historias reales de nuestras dinámicas.
-          {hasImages ? " Toca una imagen para verla en grande." : null}
         </p>
 
-        <ul className="media-grid">
-          {media.map((item, index) => (
-            <li key={item.src} className="reveal" style={delay((index % 4) * 90)}>
-              {item.type === "video" ? (
-                <PhoneVideo src={item.src} label={`Video del grupo ${index + 1}`} />
-              ) : (
-                <ZoomableImage src={item.src} alt={`Historia del grupo ${index + 1}`} />
-              )}
-            </li>
+        <div className="stories reveal" style={delay(250)}>
+          {phones.map((items, index) => (
+            <StoryPhone key={index} items={items} label={`Historias del grupo ${index + 1}`} />
           ))}
-        </ul>
+        </div>
 
         {site.instagramHighlight ? (
-          <p className="media-grid__more">
+          <p className="stories__more">
             <a href={site.instagramHighlight} target="_blank" rel="noopener noreferrer" className="text-link">
               <InstagramIcon className="size-4" />
               Ver todas las historias en Instagram

@@ -39,7 +39,7 @@ const METEOR_MAX_GAP = 8000;
 /**
  * Cielo de estrellas que flotan despacio, titilan, se iluminan con destellos y de vez en cuando
  * dejan pasar una estrella fugaz. En escritorio se desplaza un poco con el mouse.
- * Se pausa con la pestaña oculta y respeta "reducir movimiento".
+ * Se pausa con la pestaña oculta; con "reducir movimiento" las estrellas solo titilan.
  */
 export function Starfield({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -152,7 +152,8 @@ export function Starfield({ className }: { className?: string }) {
         pointer.x += (pointer.targetX - pointer.x) * ease;
         pointer.y += (pointer.targetY - pointer.y) * ease;
 
-        for (const star of stars) {
+        // Con "reducir movimiento" las estrellas solo titilan: no flotan ni cruzan estrellas fugaces.
+        for (const star of reducedMotion ? [] : stars) {
           star.x += (DRIFT_X * star.depth * dt) / width;
           star.y += (DRIFT_Y * star.depth * dt) / height;
           if (star.x < -0.02) star.x += 1.04;
@@ -162,7 +163,7 @@ export function Starfield({ className }: { className?: string }) {
         }
 
         if (!nextMeteor) nextMeteor = time + 1500 + Math.random() * 1500;
-        if (time >= nextMeteor) {
+        if (!reducedMotion && time >= nextMeteor) {
           spawnMeteor();
           nextMeteor = time + METEOR_MIN_GAP + Math.random() * (METEOR_MAX_GAP - METEOR_MIN_GAP);
         }
@@ -179,7 +180,7 @@ export function Starfield({ className }: { className?: string }) {
     };
 
     const start = () => {
-      if (running || reducedMotion || !inView || document.hidden) return;
+      if (running || !inView || document.hidden) return;
       running = true;
       last = 0;
       frame = requestAnimationFrame(loop);

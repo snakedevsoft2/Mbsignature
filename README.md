@@ -28,10 +28,10 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 
 ### Videos e historias del grupo
 
-La sección "Así se vive el Grupo Signature" se arma sola con lo que haya en estas carpetas, ordenado por nombre, en una cuadrícula de tarjetas verticales (2 columnas en celular, 3 en tablet y 5 en computador):
+La sección "Así se vive el Grupo Signature" muestra dos celulares que pasan solos, como historias de Instagram, lo que haya en estas carpetas (ordenado por nombre y repartido entre los dos). Cada imagen dura 4 segundos y cada video hasta que termina; tocar a la derecha adelanta, a la izquierda vuelve y mantener presionado pausa.
 
-- `public/video/clientes/`: videos (`.mp4`, `.webm`, `.mov`). Se reproducen sin sonido al aparecer en pantalla; al tocarlos se activa el sonido.
-- `public/historias/`: imágenes (`.jpg`, `.png`, `.webp`), por ejemplo capturas de las historias destacadas de Instagram. Se ven completas, sin recortar, y al tocarlas se abren en grande. Instagram no permite insertar historias en otras páginas, por eso se suben como archivos.
+- `public/video/clientes/`: videos (`.mp4`, `.webm`, `.mov`). Se reproducen sin sonido; el botón del parlante activa el sonido.
+- `public/historias/`: imágenes (`.jpg`, `.png`, `.webp`), por ejemplo capturas de las historias destacadas de Instagram. Se ven completas, sin recortar, con la misma imagen desenfocada de fondo. Instagram no permite insertar historias en otras páginas, por eso se suben como archivos.
 
 **Antes de subir una captura, tapa los números de celular.** Las originales van en `img/` (no se sube a GitHub) y en `public/historias/` solo las versiones con los números tapados.
 
@@ -41,7 +41,7 @@ Para que salgan en un orden concreto, ponles un número al inicio del nombre (`0
 
 - El fondo (negro, luces dorada y verde, estrellas que titilan y destellan) está en `src/components/lux-background.tsx` y `starfield.tsx`.
 - El video principal arranca solo y sin sonido al entrar a la página.
-- Las animaciones de entrada y de aparición al bajar están en `globals.css`; las que necesitan JS (aparición al bajar, luz que sigue al mouse, inclinación del video) en `src/components/page-motion.tsx`. Si el celular tiene activado "reducir movimiento", se desactivan.
+- Las animaciones de entrada y de aparición al bajar están en `globals.css`; las que necesitan JS (aparición al bajar, luz que sigue al mouse, inclinación del video) en `src/components/page-motion.tsx`. Si el celular o Windows tiene activado "reducir movimiento" (en Windows: Configuración → Accesibilidad → Efectos visuales → Efectos de animación apagado), la página sigue animada pero sin desplazamientos grandes: las entradas son fundidos y las historias cambian con fundido.
 - La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo de la barra superior es `public/brand/emblema-mb.png`.
 - Los íconos son `src/app/icon.svg`, `src/app/favicon.ico` y `src/app/apple-icon.png`.
 
