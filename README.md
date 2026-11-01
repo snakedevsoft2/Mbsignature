@@ -28,7 +28,8 @@ Casi todo se cambia en [`src/config/site.ts`](src/config/site.ts):
 
 - La sección de ganadores solo aparece cuando `winnerChats` tiene capturas.
 - Las capturas originales, con los números de celular a la vista, van en `ganadores-originales/` (no se sube a GitHub). En `public/ganadores/` solo van las versiones con los números tapados.
-- El video solo se descarga cuando empieza a reproducirse, sin sonido; al tocarlo se activa el sonido.
+- El fondo (negro, onda y cintas doradas, estrellas que titilan y destellan) está en `src/components/lux-background.tsx` y `starfield.tsx`.
+- El video arranca solo y sin sonido al entrar a la página; al tocarlo se activa el sonido.
 - La imagen que aparece al compartir el enlace es `src/app/opengraph-image.jpg` (1200×630) y el logo del encabezado es `public/brand/emblema-mb.png`.
 - Los íconos son `src/app/icon.svg`, `src/app/favicon.ico` y `src/app/apple-icon.png`.
 

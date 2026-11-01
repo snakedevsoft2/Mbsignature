@@ -1,27 +1,34 @@
-import { Crown } from "lucide-react";
 import Image from "next/image";
+import { site } from "@/config/site";
+import { InstagramIcon } from "./icons";
 
 export function SiteHeader() {
   return (
-    <header className="brand-band">
-      <div className="brand-band__inner">
-        <Image
-          src="/brand/emblema-mb.png"
-          alt=""
-          width={320}
-          height={320}
-          sizes="5rem"
-          preload
-          className="brand-band__emblem"
-        />
-        <div className="flex flex-col items-center">
-          <p className="brand-band__name">MB Signature</p>
-          <p className="brand-band__tagline">
-            <Crown aria-hidden="true" className="size-3" strokeWidth={2} />
-            Sueña <span aria-hidden="true">·</span> Participa <span aria-hidden="true">·</span> Gana
-            <Crown aria-hidden="true" className="size-3" strokeWidth={2} />
-          </p>
+    <header className="topbar">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <Image
+            src="/brand/emblema-mb.png"
+            alt=""
+            width={320}
+            height={320}
+            sizes="2.75rem"
+            preload
+            className="topbar__emblem"
+          />
+          <p className="topbar__name">MB Signature</p>
         </div>
+        {site.instagram ? (
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="topbar__ig"
+            aria-label="Instagram oficial de MB Signature"
+          >
+            <InstagramIcon className="size-4" />
+          </a>
+        ) : null}
       </div>
     </header>
   );

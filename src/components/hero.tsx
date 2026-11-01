@@ -1,79 +1,64 @@
-import { Banknote, Ticket } from "lucide-react";
+import { Banknote, CalendarCheck, Crown, Trophy } from "lucide-react";
 import { site } from "@/config/site";
-import { formatNumber } from "@/lib/utils";
-import { HeroVideo } from "./hero-video";
-import { WhatsAppIcon } from "./icons";
+import { PhoneVideo } from "./phone-video";
 
-const perks = [
-  { icon: WhatsAppIcon, label: "Grupo privado en WhatsApp" },
-  { icon: Ticket, label: "Tú eliges tu número" },
-  { icon: Banknote, label: "Premios en efectivo" },
+const highlights = [
+  { icon: CalendarCheck, label: "Dinámicas diarias" },
+  { icon: Banknote, label: "Premios reales" },
+  { icon: Crown, label: `Más de ${site.yearsOfExperience} años` },
 ];
 
 export function Hero() {
-  const { offer, video } = site;
-
   return (
-    <section aria-labelledby="hero-title" className="hero">
-      <Confetti />
+    <section aria-labelledby="hero-title" className="hero container-page">
+      <div className="hero__copy">
+        <p className="live-pill">
+          <span aria-hidden="true" className="live-dot" />
+          Grupo oficial de WhatsApp
+        </p>
 
-      <div className="hero__grid">
-        <h1 id="hero-title" className="offer">
-          <span className="offer__lead">Con solo</span>{" "}
-          <span className="offer__num">{formatNumber(offer.price)}</span>{" "}
-          <span className="offer__ribbon">Pesos</span>{" "}
-          <span className="offer__lead offer__lead--gap">Puedes ganar</span>{" "}
-          <span className="offer__small">hasta</span>{" "}
-          <span className="offer__num">{formatNumber(offer.prize)}</span>{" "}
-          <span className="offer__ribbon">En efectivo</span>
+        <h1 id="hero-title" className="hero__title">
+          Todos los días hay un{" "}
+          <span className="hero__accent">
+            ganador
+            <svg aria-hidden="true" viewBox="0 0 300 24" preserveAspectRatio="none" className="hero__stroke">
+              <path d="M4 17C70 7 160 4 296 11" />
+            </svg>
+          </span>
         </h1>
 
-        <HeroVideo
-          src={video.src}
-          poster={video.poster}
-          label="Video de Marcela, creadora de MB Signature, invitando a unirse al grupo"
-        />
+        <p className="hero__lead">
+          Únete gratis al <strong>Grupo Signature</strong> en WhatsApp y participa en nuestras dinámicas
+          diarias. ¿El próximo ganador? Puedes ser tú.
+        </p>
+
+        <ul className="hero__highlights">
+          {highlights.map(({ icon: Icon, label }) => (
+            <li key={label}>
+              <Icon aria-hidden="true" className="size-4" strokeWidth={1.8} />
+              {label}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <ul className="perks">
-        {perks.map(({ icon: Icon, label }) => (
-          <li key={label}>
-            <Icon className="perks__icon" strokeWidth={1.6} />
-            {label}
-          </li>
-        ))}
-      </ul>
-
-      <p className="hint">
-        Toca el botón verde y únete
-        <svg viewBox="0 0 40 52" aria-hidden="true" className="hint__arrow">
-          <path d="M13 3h14v24h10L20 48 3 27h10Z" />
-        </svg>
-      </p>
+      <div className="hero__media">
+        <span aria-hidden="true" className="hero__halo" />
+        <PhoneVideo
+          src={site.video.src}
+          poster={site.video.poster}
+          label="Video de Marcela, creadora de MB Signature, invitando a unirse al grupo"
+          eager
+        />
+        <p aria-hidden="true" className="float-chip float-chip--top">
+          <span className="live-dot" />
+          En vivo en el grupo
+        </p>
+        <p aria-hidden="true" className="float-chip float-chip--bottom">
+          <Trophy className="size-4 text-gold" strokeWidth={1.8} />
+          Un ganador cada día
+        </p>
+      </div>
     </section>
-  );
-}
-
-/** Tiras doradas sueltas, como confeti, en los bordes del inicio. */
-function Confetti() {
-  const strips = [
-    [6, 8, -28],
-    [18, 30, 40],
-    [4, 52, 12],
-    [12, 76, -50],
-    [88, 6, 35],
-    [95, 26, -20],
-    [84, 48, 60],
-    [93, 70, -38],
-    [46, 3, 70],
-    [62, 92, -15],
-  ];
-
-  return (
-    <div aria-hidden="true" className="confetti">
-      {strips.map(([x, y, angle]) => (
-        <span key={`${x}-${y}`} style={{ left: `${x}%`, top: `${y}%`, rotate: `${angle}deg` }} />
-      ))}
-    </div>
   );
 }

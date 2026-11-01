@@ -2,15 +2,25 @@
 
 import { Play, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-type NetworkInformation = { saveData?: boolean };
+import { cn } from "@/lib/utils";
 
 /**
- * Video vertical que se reproduce sin sonido mientras está en pantalla (como en Instagram).
- * Solo se descarga cuando empieza a reproducirse, para que la página cargue rápido.
- * No arranca solo si el usuario pidió ahorrar datos o reducir movimiento.
+ * Video vertical sin sonido, como en Instagram: se reproduce mientras está en pantalla y se pausa
+ * al salir. Con `eager` arranca apenas se entra a la página. Tocarlo activa o quita el sonido.
  */
-export function HeroVideo({ src, poster, label }: { src: string; poster: string; label: string }) {
+export function PhoneVideo({
+  src,
+  poster,
+  label,
+  eager = false,
+  className,
+}: {
+  src: string;
+  poster?: string;
+  label: string;
+  eager?: boolean;
+  className?: string;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const pausedByUserRef = useRef(false);
   const [playing, setPlaying] = useState(false);
@@ -19,9 +29,9 @@ export function HeroVideo({ src, poster, label }: { src: string; poster: string;
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion || connection?.saveData) return;
+    // Los navegadores solo permiten la reproducción automática si el video está silenciado.
+    video.muted = true;
+    if (eager) video.play().catch(() => undefined);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -31,11 +41,11 @@ export function HeroVideo({ src, poster, label }: { src: string; poster: string;
           video.pause();
         }
       },
-      { threshold: 0.35 },
+      { threshold: 0.5 },
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   const play = () => {
     const video = videoRef.current;
@@ -44,7 +54,6 @@ export function HeroVideo({ src, poster, label }: { src: string; poster: string;
     video.play().catch(() => undefined);
   };
 
-  // Tocar el video activa o quita el sonido; si estaba en pausa, lo reproduce.
   const toggleSound = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -54,28 +63,30 @@ export function HeroVideo({ src, poster, label }: { src: string; poster: string;
   };
 
   return (
-    <div className="video-card">
+    <div className={cn("phone", className)}>
       <video
         ref={videoRef}
-        src={src}
+        // Sin portada, "#t=0.1" hace que el celular muestre el primer cuadro del video.
+        src={poster ? src : `${src}#t=0.1`}
         poster={poster}
+        autoPlay={eager}
         muted
         loop
         playsInline
-        preload="none"
+        preload={eager ? "auto" : "metadata"}
         aria-label={label}
         onClick={toggleSound}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
       {!playing ? (
-        <button type="button" className="video-card__play" onClick={play} aria-label="Reproducir video">
+        <button type="button" className="phone__play" onClick={play} aria-label="Reproducir video">
           <Play className="size-6 translate-x-0.5" fill="currentColor" strokeWidth={0} />
         </button>
       ) : null}
       <button
         type="button"
-        className="video-card__sound"
+        className="phone__sound"
         onClick={toggleSound}
         aria-pressed={!muted}
         aria-label={muted ? "Activar sonido" : "Silenciar"}

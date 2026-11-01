@@ -5,38 +5,25 @@ export const site = {
   // Dirección principal en Vercel; dinamicasmb.com redirige a www.
   url: "https://www.dinamicasmb.com",
   description:
-    "Únete al Grupo Signature en WhatsApp y participa en nuestras dinámicas con premios en efectivo.",
+    "Todos los días hay un ganador. Únete gratis al Grupo Signature en WhatsApp y participa en nuestras dinámicas diarias.",
 
   // Enlace de invitación al grupo. Si el grupo se llena, reemplázalo por el nuevo enlace.
-  whatsappGroupUrl:
-    "https://chat.whatsapp.com/LtkJ40JsiCA3TenrU0ZfY3?s=cl&p=i&mlu=0&ilr=4",
+  whatsappGroupUrl: "https://chat.whatsapp.com/L6FR4fjVzm38WAV6TiD1vg",
 
-  // Cifras grandes del inicio: "Con solo $price pesos puedes ganar hasta $prize en efectivo".
-  offer: {
-    price: 10_000,
-    prize: 700_000,
-  },
+  yearsOfExperience: 6,
 
-  // Video del inicio (dentro de /public). La portada se muestra mientras carga.
+  // Video principal (dentro de /public). La portada se muestra mientras carga.
+  // Los videos de la sección "En el grupo" se toman solos de /public/video/clientes
+  // y las imágenes de historias de /public/historias.
   video: {
     src: "/video/marcela.mp4",
     poster: "/video/marcela-portada.jpg",
   },
 
-  // Deja vacío ("") si no se usa y no se mostrará en el pie de página.
+  // Canal oficial de Instagram y la historia destacada que se enlaza en la página.
   instagram: "https://www.instagram.com/marcebetasignature1/",
+  instagramHighlight: "https://www.instagram.com/stories/highlights/18046717769581335/",
 
   // Pixel de Meta de las campañas. Vacío ("") = no se carga.
   metaPixelId: "1590585119024916",
 };
-
-export type WinnerChat = {
-  // Captura dentro de /public/ganadores, con los números de celular ya tapados.
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-};
-
-// Capturas de chats y comprobantes de los ganadores, en el orden en que se muestran.
-export const winnerChats: WinnerChat[] = [];

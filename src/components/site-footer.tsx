@@ -10,16 +10,10 @@ async function CurrentYear() {
 export function SiteFooter() {
   return (
     <footer className="footer">
-      <p>
+      <p className="footer__brand">MB Signature</p>
+      <p className="mt-2">
         © <CurrentYear /> {site.name} · Solo para mayores de 18 años. Participa con responsabilidad.
       </p>
-      {site.instagram ? (
-        <p className="mt-1.5">
-          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="footer__link">
-            Síguenos en Instagram
-          </a>
-        </p>
-      ) : null}
     </footer>
   );
 }
